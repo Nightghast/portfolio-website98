@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 98 Style Website Template</title>
+
+    <!--
+        Windows 98 Style Website Template
+        Based on the original Windows template from HTML5-Templates.com
+        Original: https://html5-templates.com/preview/windows.html
+    -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         DESKTOP
+         ============================================================ -->
+    <div id="desktop" class="crt-effect">
+
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+
+            <div class="icon" onclick="openWindow('about')">
+                <div class="icon-image"><i class="fas fa-user"></i></div>
+                <span class="icon-text">About Me</span>
+            </div>
+
+            <div class="icon" onclick="openWindow('education')">
+                <div class="icon-image"><i class="fas fa-user-graduate"></i></div>
+                <span class="icon-text">Education</span>
+            </div>
+
+            <div class="icon" onclick="openWindow('projects')">
+                <div class="icon-image"><i class="fas fa-folder"></i></div>
+                <span class="icon-text">My Projects</span>
+            </div>
+
+            <div class="icon" onclick="openWindow('calculator')">
+                <div class="icon-image"><i class="fas fa-calculator"></i></div>
+                <span class="icon-text">Calculator</span>
+            </div>
+
+            <div class="icon" onclick="openWindow('paint')">
+                <div class="icon-image"><i class="fas fa-palette"></i></div>
+                <span class="icon-text">Paint</span>
+            </div>
+
+            <div class="icon" onclick="openWindow('notepad')">
+                <div class="icon-image"><i class="fas fa-edit"></i></div>
+                <span class="icon-text">Notepad</span>
+            </div>
+
+            <div class="icon" onclick="showCVMessage()">
+                <div class="icon-image"><i class="fas fa-file-alt"></i></div>
+                <span class="icon-text">CV</span>
+            </div>
+
+            <div class="icon" onclick="virusPrank()">
+                <div class="icon-image virus-icon"><i class="fas fa-bug"></i></div>
+                <span class="icon-text">Virus.exe</span>
+            </div>
+
+            <div class="icon" id="recycle-desktop-icon" onclick="recycle()">
+                <div class="icon-image virus-icon"><i class="fas fa-trash-can"></i></div>
+                <span class="icon-text">Recycle Bin</span>
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+             WINDOWS
+             ======================================================== -->
+
+        <!-- Live Stream Window -->
+        <div class="window stream-window" id="stream-window" style="top: 80px; left: 150px; width: 650px; height: 500px;">
+
+            <div class="window-header">
+                <span class="window-title">📺 Live Stream</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('stream'); return false;">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('stream'); return false;">□</a>
+                    <a href="#" class="window-button close-btn" onclick="minimizeWindow('stream'); return false;">×</a>
+                </div>
+            </div>
+
+            <div class="window-content stream-content">
+
+                <div class="stream-info">
+                    <div class="stream-title">
+                        <strong>Alex is Live!</strong>
+                        <span class="live-badge">● LIVE</span>
+                    </div>
+                    <div class="viewer-count">
+                        👁 <strong id="viewer-count">1,284</strong> viewers
+                    </div>
+                </div>
+
+                <div class="stream-layout">
+
+                    <div class="stream-video">
+                        <img src="images/stream.gif" alt="Live stream">
+                        <div class="video-overlay"><span>● LIVE</span></div>
+                    </div>
+
+                    <div class="stream-chat">
+                        <div class="chat-header">💬 Live Chat</div>
+                        <div class="chat-messages" id="chat-messages"></div>
+                        <div class="chat-input">
+                            <input type="text" placeholder="Send a message...">
+                            <button>Send</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="stream-footer">
+                    <div><strong>🎮 Alex Navarra</strong></div>
+                    <div>🔴 Streaming now</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- About Window -->
+        <div class="window" id="about-window" style="top: 80px; left: 150px; width: 500px; height: 400px;">
+
+            <div class="window-header">
+                <span class="window-title">About Me</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('about')">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('about')">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('about')">×</a>
+                </div>
+            </div>
+
+            <div class="window-content">
+
+                <!-- Left Column -->
+                <aside class="about-sidebar">
+
+                    <div class="profile-image">
+                        <img src="images/profile.jpg" alt="Alex Navarra">
+                    </div>
+
+                    <div class="profile-description">
+                        <strong>Alex Navarra</strong>
+                        <p>Your IT Technician who is passionate about technology and helping others, with a strong focus on problem-solving and continuous learning.</p>
+                    </div>
+
+                    <div class="profile-contact">
+                        <strong>Contact</strong>
+                        <a href="mailto:alexanderurielnavarra@yahoo.com">📧 Email</a>
+                        <a href="https://www.linkedin.com/in/alexanderurielnavarra/" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+                        <a href="https://github.com/Nightghast" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Github</a>
+                    </div>
+
+                </aside>
+
+                <!-- Right Column -->
+                <main class="about-main">
+
+                    <div class="welcome-box">
+                        <h3>👋 Welcome to My Website!</h3>
+                        <p>Welcome to my little corner of the internet — a nostalgic Windows 98-inspired portfolio showcasing my IT experience, projects and passion for technology.</p>
+                    </div>
+
+                    <section class="about-section">
+                        <h4>👨‍💻 Profile</h4>
+                        <p>
+                            I'm an <strong>IT Technician at SOCOTEC UK</strong> with a
+                            <strong>BSc in Computer Science</strong> and a
+                            <strong>Distinction* in BTEC Level 3 ICT</strong>.
+                        </p>
+                        <p>I provide first-line technical support across on-premises and Microsoft 365 environments, managing user accounts, permissions, devices, software and enterprise applications.</p>
+                    </section>
+
+                    <section class="skills-section" id="skills">
+
+                        <section class="skills-heading">
+                            <h4>💡 Key Skills</h4>
+                            <p>Technical skills, tools, certifications and IT support experience</p>
+                        </section>
+
+                        <div class="skills-grid">
+
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span class="skill-icon">🖥️</span>
+                                    <h3>IT Support &amp; Infrastructure</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>Desktop Support</span>
+                                    <span>Remote Desktop Support</span>
+                                    <span>Network Support</span>
+                                    <span>Network Management</span>
+                                    <span>Computer Hardware</span>
+                                    <span>Peripheral Support</span>
+                                    <span>Mobile Device Management</span>
+                                    <span>Escalation &amp; Onsite Support</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span class="skill-icon">☁️</span>
+                                    <h3>Microsoft &amp; Cloud</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>Microsoft 365</span>
+                                    <span>Office 365</span>
+                                    <span>Microsoft Entra ID</span>
+                                    <span>Azure AD</span>
+                                    <span>Microsoft Intune</span>
+                                    <span>Windows Server</span>
+                                    <span>Outlook &amp; Exchange</span>
+                                    <span>Endpoint Central</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span class="skill-icon">🔐</span>
+                                    <h3>Networking &amp; Security</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>Network Protocols</span>
+                                    <span>Network Security</span>
+                                    <span>System Security</span>
+                                    <span>Cyber Security</span>
+                                    <span>VPN &amp; Wi-Fi Support</span>
+                                    <span>Virtualisation</span>
+                                    <span>Mimecast</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span class="skill-icon">💻</span>
+                                    <h3>Programming &amp; Development</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>Python</span>
+                                    <span>Java</span>
+                                    <span>JavaScript</span>
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span class="skill-icon">🎫</span>
+                                    <h3>IT Service Management</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>JIRA</span>
+                                    <span>Ticket Management</span>
+                                    <span>Incident Management</span>
+                                    <span>User Support</span>
+                                    <span>Technical Troubleshooting</span>
+                                    <span>Onsite Support</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-card certifications">
+                                <div class="skill-header">
+                                    <span class="skill-icon">🏆</span>
+                                    <h3>Certifications &amp; Training</h3>
+                                </div>
+                                <div class="skill-list">
+                                    <span>CompTIA A+ Core 1 (2025)</span>
+                                    <span>CompTIA A+ Core 2 (2025)</span>
+                                    <span>MCTS Windows Client (2025)</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                </main>
+
+            </div>
+        </div>
+
+        <!-- Education Window -->
+        <div class="window" id="education-window" style="top: 80px; left: 150px; width: 500px; height: 400px;">
+
+            <div class="window-header">
+                <span class="window-title">Education</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('education'); return false;">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('education'); return false;">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('education'); return false;">×</a>
+                </div>
+            </div>
+
+            <div class="window-content">
+                <div class="education-content">
+
+                    <div class="education-header">
+                        <h2>🎓 Education</h2>
+                        <p>My academic background and technical education.</p>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-icon">🎓</div>
+                        <div class="education-details">
+                            <h3>BSc Computer Science</h3>
+                            <h4>Middlesex University</h4>
+                            <span class="education-date">2019 – 2023</span>
+                            <p>Upper Second-Class Honours (2:1)</p>
+                            <p>Studied software development, web technologies, databases, cybersecurity, networking and computer systems.</p>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-icon">💻</div>
+                        <div class="education-details">
+                            <h3>BTEC Level 3 National Diploma in ICT</h3>
+                            <h4>City of Westminster College</h4>
+                            <span class="education-date">2016 – 2018</span>
+                            <p>Distinction* (D*D*D*)</p>
+                            <p>Developed practical knowledge in IT systems, cybersecurity, networking, databases and Microsoft Office 365.</p>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-icon">🖥️</div>
+                        <div class="education-details">
+                            <h3>IT Accelerator Programme</h3>
+                            <h4>Just IT</h4>
+                            <span class="education-date">Professional IT Training</span>
+                            <p>Practical training covering CompTIA A+, Microsoft 365, Azure, Intune, Active Directory, networking and IT support.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Window -->
+        <div class="window" id="projects-window" style="top: 80px; left: 150px; width: 650px; height: 500px;">
+
+            <div class="window-header">
+                <span class="window-title">📁 My Projects</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('projects'); return false;">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('projects'); return false;">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('projects'); return false;">×</a>
+                </div>
+            </div>
+
+            <div class="window-content projects-content">
+
+                <div class="projects-toolbar">
+                    <button onclick="minimizeWindow('projects')">⬅ Back</button>
+                    <button onclick="window.open('https://github.com/', '_blank')">🔍 Search</button>
+                    <button onclick="window.open('https://github.com/Nightghast?tab=repositories', '_blank')">📁 My Files</button>
+                </div>
+
+                <div class="projects-address">
+                    <span>Address:</span>
+                    <input type="text" value="C:\Alex\Projects" readonly>
+                </div>
+
+                <div class="projects-introduction">
+                    <strong>My Projects</strong>
+                    <p>Welcome to my project folder. Here you can explore some of my personal, university and programming projects.</p>
+                </div>
+
+                <div class="projects-list">
+                    <table class="projects-table">
+                        <thead>
+                            <tr>
+                                <th>📄 Name</th>
+                                <th>Type</th>
+                                <th>Technology</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="window.open('https://github.com/Nightghast/pymon', '_blank')">
+                                <td>🎮 PyMon</td>
+                                <td>Game</td>
+                                <td>Python / Pygame</td>
+                                <td>2025</td>
+                            </tr>
+                            <tr onclick="window.open('https://github.com/Nightghast/phone', '_blank')">
+                                <td>📱 Virtual Phone</td>
+                                <td>Web Application</td>
+                                <td>HTML / CSS / JavaScript</td>
+                                <td>2025</td>
+                            </tr>
+                            <tr onclick="window.open('YOUR_LINK_HERE', '_blank')">
+                                <td>🤖 Tetris Bot</td>
+                                <td>Automation</td>
+                                <td>Python</td>
+                                <td>2025</td>
+                            </tr>
+                            <tr onclick="window.open('YOUR_LINK_HERE', '_blank')">
+                                <td>💡 Arduino DMX</td>
+                                <td>Hardware</td>
+                                <td>Arduino / C++</td>
+                                <td>2023</td>
+                            </tr>
+                            <tr onclick="window.open('https://github.com/Nightghast/portfolio', '_blank')">
+                                <td>🌐 Portfolio Website</td>
+                                <td>Website</td>
+                                <td>HTML / CSS / JavaScript</td>
+                                <td>2026</td>
+                            </tr>
+                            <tr onclick="window.open('YOUR_LINK_HERE', '_blank')">
+                                <td>🔐 GDPR Research</td>
+                                <td>Dissertation</td>
+                                <td>Research / Data Analysis</td>
+                                <td>2023</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="projects-status">
+                    <span>6 objects</span>
+                    <span>My Projects</span>
+                </div>
+
+                <div class="projects-buttons">
+                    <button onclick="window.open('https://github.com/Nightghast', '_blank')">💻 GitHub</button>
+                    <button onclick="window.open('https://www.linkedin.com/in/alexanderurielnavarra/', '_blank')">🌐 LinkedIn</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Calculator Window -->
+        <div class="window" id="calculator-window" style="top: 80px; left: 150px; width: 200px; height: 300px;">
+
+            <div class="window-header">
+                <span class="window-title">Calculator</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('calculator')">_</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('calculator')">×</a>
+                </div>
+            </div>
+
+            <div class="window-content" style="padding: 4px;">
+                <input type="text" id="calc-display" readonly value="0"
+                    style="width: 100%; text-align: right; font-family: monospace; font-size: 14px; margin-bottom: 4px;">
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;">
+                    <button onclick="clearCalc()" style="grid-column: span 2;">Clear</button>
+                    <button onclick="calcBackspace()">←</button>
+                    <button onclick="calcInput('/')">/</button>
+
+                    <button onclick="calcInput('7')">7</button>
+                    <button onclick="calcInput('8')">8</button>
+                    <button onclick="calcInput('9')">9</button>
+                    <button onclick="calcInput('*')">×</button>
+
+                    <button onclick="calcInput('4')">4</button>
+                    <button onclick="calcInput('5')">5</button>
+                    <button onclick="calcInput('6')">6</button>
+                    <button onclick="calcInput('-')">-</button>
+
+                    <button onclick="calcInput('1')">1</button>
+                    <button onclick="calcInput('2')">2</button>
+                    <button onclick="calcInput('3')">3</button>
+                    <button onclick="calcInput('+')">+</button>
+
+                    <button onclick="calcInput('0')" style="grid-column: span 2;">0</button>
+                    <button onclick="calcInput('.')">.</button>
+                    <button onclick="calcEqual()">=</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paint Window -->
+        <div class="window" id="paint-window" style="top: 100px; left: 300px; width: 560px; height: 460px;">
+
+            <div class="window-header">
+                <span class="window-title">🎨 Paint</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('paint'); return false;">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('paint'); return false;">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('paint'); return false;">×</a>
+                </div>
+            </div>
+
+            <div class="window-content paint-content">
+
+                <div class="paint-toolbar">
+                    <button type="button" class="paint-tool active" data-tool="pencil" onclick="setPaintTool('pencil', this)">✏️ Pencil</button>
+                    <button type="button" class="paint-tool" data-tool="eraser" onclick="setPaintTool('eraser', this)">🧽 Eraser</button>
+                    <button type="button" class="paint-tool" data-tool="line" onclick="setPaintTool('line', this)">📏 Line</button>
+                    <button type="button" class="paint-tool" data-tool="rectangle" onclick="setPaintTool('rectangle', this)">▭ Rect</button>
+                    <button type="button" class="paint-tool" data-tool="fill" onclick="setPaintTool('fill', this)">🪣 Fill</button>
+
+                    <label class="paint-size-label">
+                        Size
+                        <input type="range" id="paint-brush-size" min="1" max="24" value="3" oninput="updatePaintBrushSize(this.value)">
+                    </label>
+
+                    <button type="button" onclick="clearPaintCanvas()">🗑 Clear</button>
+                    <button type="button" onclick="downloadPaintCanvas()">💾 Save</button>
+                </div>
+
+                <div class="paint-body">
+                    <canvas id="paint-canvas" width="520" height="300"></canvas>
+                </div>
+
+                <div class="paint-palette-row">
+                    <div id="paint-current-color"></div>
+                    <input type="color" id="paint-color-picker" value="#000000" onchange="setPaintColor(this.value)">
+                    <div class="paint-palette" id="paint-palette"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Notepad Window -->
+        <div class="window" id="notepad-window" style="top: 140px; left: 250px; width: 400px; height: 300px;">
+
+            <div class="window-header">
+                <span class="window-title">Untitled - Notepad</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('notepad')">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('notepad')">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('notepad')">×</a>
+                </div>
+            </div>
+
+            <div class="window-content" style="padding: 0;">
+                <textarea id="notepad-text" placeholder="Type your notes here..."
+                    style="width: 100%; height: 100%; border: none; resize: none; font-family: 'Courier New', monospace; font-size: 11px; padding: 4px;">Welcome to Notepad!
+
+My Notes:
+- There's a different of being a coffee lover and a coffee addict. It's just happen that I am both.
+- Favourite person: Espresso Machine!
+- 3 life goals: caffeinate, over-caffeinate, and pretend that's a balanced diet.
+- Turns out I had it wrong — it's 'klawd,' not 'klowd.
+
+Try typing something!</textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Recycle Bin Window -->
+        <div class="window" id="recycle-window" style="top: 90px; left: 320px; width: 650px; height: 500px;">
+
+            <div class="window-header">
+                <span class="window-title">🗑️ Recycle Bin</span>
+                <div class="window-controls">
+                    <a href="#" class="window-button minimize-btn" onclick="minimizeWindow('recycle'); return false;">_</a>
+                    <a href="#" class="window-button maximize-btn" onclick="maximizeWindow('recycle'); return false;">□</a>
+                    <a href="#" class="window-button close-btn" onclick="closeWindow('recycle'); return false;">×</a>
+                </div>
+            </div>
+
+            <div class="window-content projects-content">
+
+                <div class="projects-toolbar">
+                    <button onclick="minimizeWindow('recycle')">⬅ Back</button>
+                    <button onclick="alert('Nice try. It\'s gone for good.')">↩️ Restore</button>
+                    <button onclick="promptEmptyRecycleBin()">🗑️ Empty Recycle Bin</button>
+                </div>
+
+                <div class="projects-address">
+                    <span>Address:</span>
+                    <input type="text" value="C:\Recycle Bin" readonly>
+                </div>
+
+                <div class="projects-introduction">
+                    <strong>Recycle Bin</strong>
+                    <p>Files and memories deleted during my IT career. Handle with care — a few of these still haunt me.</p>
+                </div>
+
+                <div class="projects-list">
+                    <table class="projects-table">
+                        <thead>
+                            <tr>
+                                <th>📄 Name</th>
+                                <th>Type</th>
+                                <th>Reason for Deletion</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recycle-table-body">
+                            <!-- populated by renderRecycleBin() in script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="projects-status">
+                    <span id="recycle-status-count">8 objects</span>
+                    <span>Recycle Bin</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================
+            TASKBAR
+            ============================================================ -->
+        <div class="taskbar">
+            <div class="start-button" onclick="toggleStartMenu()">
+                <i class="fab fa-windows"></i>
+                Start
+            </div>
+
+            <div class="taskbar-items" id="taskbar-items"></div>
+
+            <div class="clock" id="clock">12:00 PM</div>
+        </div>
+
+        <!-- ============================================================
+            START MENU
+            ============================================================ -->
+        <div class="start-menu" id="start-menu">
+            <div class="start-menu-header">
+                <i class="fab fa-windows"></i>
+                Windows 98
+                <p>Powered by Claude</p>
+            </div>
+
+            <div class="start-menu-items">
+                <div class="start-menu-item" onclick="openWindow('about')">
+                    <i class="fas fa-user"></i>
+                    About Me
+                </div>
+                <div class="start-menu-item" onclick="openWindow('education')">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </div>
+                <div class="start-menu-item" onclick="openWindow('projects')">
+                    <i class="fas fa-folder"></i>
+                    My Projects
+                </div>
+                <div class="start-menu-item" onclick="openWindow('calculator')">
+                    <i class="fas fa-calculator"></i>
+                    Calculator
+                </div>
+                <div class="start-menu-item" onclick="openWindow('paint')">
+                    <i class="fas fa-paintbrush"></i>
+                    Paint
+                </div>
+                <div class="start-menu-item" onclick="openWindow('notepad')">
+                    <i class="fas fa-edit"></i>
+                    Notepad
+                </div>
+                <div class="start-menu-item" onclick="showCVMessage()">
+                    <i class="fas fa-file-alt"></i>
+                    CV
+                </div>
+                <div class="start-menu-item" onclick="openWindow('recycle')">
+                    <i class="fas fa-trash-can"></i>
+                    Recycle Bin
+                </div>
+                <div class="start-menu-separator"></div>
+
+                <div class="start-menu-item" onclick="showShutdownDialog()">
+                    <i class="fas fa-power-off"></i>
+                    Shut Down...
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom JavaScript -->
+        <script src="script.js"></script>
+
+        </body>
+        </html>

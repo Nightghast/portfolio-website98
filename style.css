@@ -1,0 +1,2791 @@
+/* ==========================================================================
+   Windows 98/XP Style Website Template
+   Based on the original Windows template from HTML5-Templates.com
+   Original: https://html5-templates.com/preview/windows.html
+
+   TABLE OF CONTENTS
+   1.  Fonts
+   2.  Theme Variables (default / cyberpunk / lilac / green)
+   3.  Reset & Base
+   4.  Desktop
+   5.  Desktop Icons
+   6.  Windows — Core Chrome (header, buttons, content, scrollbars)
+   7.  Taskbar & Start Button
+   8.  Start Menu
+   9.  Forms & Dialog Buttons
+   10. Window: About
+   11. Window: Education
+   12. Window: Skills
+   13. Window: Projects
+   14. Window: Live Stream / Chat
+   15. Fireworks Effect
+   16. Fake Virus / Shutdown Prank Effects
+   17. Utility Classes & CRT Effect
+   18. Accessibility Extras (mobile)
+   19. Window: Paint (added later)
+   20. Recycle Bin (added later)
+
+   NOTE: See the bottom of this file for a short "Issues Found" log of bugs
+   spotted while reorganizing (duplicate/conflicting rules etc.).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. FONTS
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=MS+Sans+Serif:wght@400;700&display=swap');
+/* NOTE: "MS Sans Serif" is not an actual Google Font — this import will
+   404 silently and the browser will fall back to the sans-serif stack.
+   Either remove this line or swap in a real bitmap-style webfont
+   (e.g. "Perfect DOS VGA 437" or a self-hosted MS Sans Serif .woff). */
+
+
+/* ==========================================================================
+   2. THEME VARIABLES
+   ========================================================================== */
+
+/* --- Default Windows 98/XP theme --- */
+:root {
+    --desktop-image: url("images/Windows XP BG.webp");
+
+    --window-bg: #f5f5f5;
+    --window-border-light: #dfdfdf;
+    --window-border-dark: #808080;
+    --window-border-darker: #404040;
+
+    --active-titlebar-start: #000080;
+    --active-titlebar-end: #0040c0;
+
+    --inactive-titlebar-start: #808080;
+    --inactive-titlebar-end: #a0a0a0;
+
+    --taskbar-bg: #c0c0c0;
+    --button-bg: #c0c0c0;
+    --button-hover: #e0e0e0;
+    --button-active: #a0a0a0;
+
+    --text-color: #000000;
+    --white: #ffffff;
+
+    --selection-bg: rgba(0, 0, 128, 0.3);
+    --selection-border: white;
+}
+/* NOTE: the original file had a second, identical ":root { ... }" block
+   labeled "Pastel Pink Theme" right after this one. Because it wasn't
+   scoped to [data-theme="pastel-pink"] like the other themes below, it
+   was 100% dead code (same selector, same values). Removed here — see
+   "Issues Found" at the bottom if you actually want a pink theme. */
+
+/* --- Cyberpunk theme --- */
+:root[data-theme="cyberpunk"] {
+    --desktop-bg: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000a1a 100%);
+    --window-bg: #0d1117;
+    --window-border-light: #30363d;
+    --window-border-dark: #21262d;
+    --window-border-darker: #161b22;
+    --active-titlebar-start: #ff00ff;
+    --active-titlebar-end: #00ffff;
+    --inactive-titlebar-start: #30363d;
+    --inactive-titlebar-end: #21262d;
+    --taskbar-bg: #161b22;
+    --button-bg: #21262d;
+    --button-hover: #30363d;
+    --button-active: #484f58;
+    --text-color: #00ffff;
+    --white: #ffffff;
+    --selection-bg: rgba(255, 0, 255, 0.3);
+    --selection-border: #ff00ff;
+}
+
+/* Cyberpunk glow/visual overrides */
+:root[data-theme="cyberpunk"] .window-header {
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+:root[data-theme="cyberpunk"] .window {
+    box-shadow:
+        2px 2px 0px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 0, 255, 0.3),
+        inset 0 0 0 1px rgba(0, 255, 255, 0.2);
+}
+
+:root[data-theme="cyberpunk"] .taskbar {
+    box-shadow:
+        0 -2px 10px rgba(255, 0, 255, 0.3),
+        inset 0 0 0 1px rgba(0, 255, 255, 0.2);
+}
+
+:root[data-theme="cyberpunk"] .start-button:hover,
+:root[data-theme="cyberpunk"] .taskbar-item:hover {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+:root[data-theme="cyberpunk"] .icon:hover {
+    text-shadow: 0 0 8px rgba(255, 0, 255, 1);
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+:root[data-theme="cyberpunk"] .icon-text {
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+:root[data-theme="cyberpunk"] input[type="text"],
+:root[data-theme="cyberpunk"] input[type="email"],
+:root[data-theme="cyberpunk"] textarea {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #00ffff;
+    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+:root[data-theme="cyberpunk"] button:hover {
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.8);
+}
+
+/* --- Lilac theme --- */
+:root[data-theme="lilac"] {
+    --desktop-bg: #c8b2db;
+    --window-bg: #e6e6fa;
+    --window-border-light: #f0f0ff;
+    --window-border-dark: #9370db;
+    --window-border-darker: #663399;
+    --active-titlebar-start: #9370db;
+    --active-titlebar-end: #663399;
+    --inactive-titlebar-start: #b8b8b8;
+    --inactive-titlebar-end: #909090;
+    --taskbar-bg: #e6e6fa;
+    --button-bg: #e6e6fa;
+    --button-hover: #f0f0ff;
+    --button-active: #d8bfd8;
+    --text-color: #000000;
+    --white: #ffffff;
+    --selection-bg: rgba(147, 112, 219, 0.3);
+    --selection-border: white;
+}
+
+/* --- Green theme --- */
+:root[data-theme="green"] {
+    --desktop-bg: #228b22;
+    --window-bg: #f0fff0;
+    --window-border-light: #ffffff;
+    --window-border-dark: #006400;
+    --window-border-darker: #004000;
+    --active-titlebar-start: #008000;
+    --active-titlebar-end: #004000;
+    --inactive-titlebar-start: #808080;
+    --inactive-titlebar-end: #606060;
+    --taskbar-bg: #f0fff0;
+    --button-bg: #f0fff0;
+    --button-hover: #f8fff8;
+    --button-active: #e0ffe0;
+    --text-color: #000000;
+    --white: #ffffff;
+    --selection-bg: rgba(0, 128, 0, 0.3);
+    --selection-border: white;
+}
+
+
+/* ==========================================================================
+   3. RESET & BASE
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: inherit;
+}
+
+body {
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    overflow: hidden;
+    height: 100vh;
+    cursor: default;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+
+/* ==========================================================================
+   4. DESKTOP
+   ========================================================================== */
+
+#desktop {
+    position: fixed;
+    inset: 0;
+    background-image: url("images/Windows XP BG.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+/* NOTE: cyberpunk/lilac/green themes define a --desktop-bg variable, but
+   #desktop above only ever uses the hardcoded XP wallpaper image and never
+   references --desktop-bg or --desktop-image. Themes currently cannot
+   change the desktop background. See "Issues Found" below. */
+
+
+/* ==========================================================================
+   5. DESKTOP ICONS
+   ========================================================================== */
+
+.desktop-icons {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: grid;
+    grid-template-columns: 80px;
+    grid-auto-rows: min-content;
+    gap: 8px;
+    z-index: 100;
+    width: 80px;
+    user-select: none;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80px;
+    min-height: 68px;
+    padding: 5px 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: background-color 0.08s ease, border-color 0.08s ease;
+    color: #ffffff;
+    text-align: center;
+}
+
+.icon:hover {
+    background: rgba(49, 106, 197, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    outline: none;
+}
+
+.icon.selected {
+    background: rgba(49, 106, 197, 0.45);
+    border: 1px dotted rgba(255, 255, 255, 0.95);
+    outline: none;
+}
+
+.icon:active {
+    transform: translateY(1px);
+}
+
+.icon-image {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.8);
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.icon:hover .icon-image {
+    transform: scale(1.04);
+}
+
+.icon.selected .icon-image {
+    filter: brightness(1.12);
+}
+
+.icon-image i {
+    display: block;
+    font-size: 30px;
+    line-height: 1;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.icon-text {
+    display: block;
+    width: 100%;
+    max-width: 76px;
+    margin: 0;
+    color: #ffffff;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 1.25;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-shadow: 1px 1px 1px #000000, -1px -1px 1px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.icon.selected .icon-text {
+    background: #316ac5;
+    color: #ffffff;
+    text-shadow: none;
+    padding: 1px 2px;
+    box-sizing: border-box;
+}
+
+/* XP-style per-icon colours (nth-child assumes a fixed icon order) */
+.icon:nth-child(2) .icon-image i { color: #1b1515; } /* Education */
+.icon:nth-child(3) .icon-image i { color: #ffd54f; } /* Projects */
+.icon:nth-child(5) .icon-image i { color: #aecf36; } /* Themes */
+.icon:nth-child(9) .icon-image i { color: #d6dac97a; } /* Recycle */
+
+/* --- Responsive: Desktop Icons --- */
+@media (max-width: 1024px) {
+    .desktop-icons {
+        top: 10px;
+        left: 10px;
+        grid-template-columns: 75px;
+        gap: 7px;
+        width: 75px;
+    }
+    .icon {
+        width: 75px;
+        min-height: 65px;
+    }
+    .icon-image,
+    .icon-image i {
+        font-size: 28px;
+    }
+    .icon-image {
+        width: 36px;
+        height: 36px;
+    }
+    .icon-text {
+        max-width: 72px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-icons {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: min-content;
+        gap: 15px;
+        width: auto;
+        justify-items: center;
+    }
+    .icon {
+        width: 70px;
+        min-height: 68px;
+        padding: 8px;
+    }
+    .icon-image {
+        width: 36px;
+        height: 36px;
+    }
+    .icon-image i {
+        font-size: 18px;
+    }
+    .icon-text {
+        max-width: 70px;
+        font-size: 12px;
+    }
+}
+/* NOTE: the original file had TWO different @media (max-width: 768px)
+   blocks for .desktop-icons/.icon with conflicting values (4x75px grid
+   with gap 12px vs. 4x1fr grid with gap 15px + justify-items: center).
+   Merged into the single block above (kept the later, more complete
+   "centered grid" version) — double check this still matches what you
+   want on phones. */
+
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(3, 75px);
+        gap: 10px;
+        top: 8px;
+        left: 8px;
+    }
+    .icon {
+        width: 75px;
+        min-height: 65px;
+    }
+    .icon-image {
+        width: 34px;
+        height: 34px;
+    }
+    .icon-image i {
+        font-size: 27px;
+    }
+    .icon-text {
+        font-size: 10px;
+        max-width: 70px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .desktop-icons {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+    }
+    .icon {
+        width: 60px;
+    }
+    .icon-image {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .icon-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+
+/* ==========================================================================
+   6. WINDOWS — CORE CHROME
+   ========================================================================== */
+
+.window {
+    position: absolute;
+    min-width: 280px;
+    min-height: 180px;
+    display: none;
+    background: #ece9d8;
+    border: 1px solid #003c9d;
+    border-radius: 7px 7px 3px 3px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.35) inset;
+    z-index: 1000;
+    resize: both;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.window.active {
+    z-index: 1001;
+}
+
+.window.visible {
+    display: block;
+}
+
+.window::after {
+    content: "";
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    background: linear-gradient(135deg, transparent 45%, #7f7f7f 46%, #7f7f7f 52%, transparent 53%);
+    opacity: 0.8;
+    z-index: 20;
+}
+
+/* --- Title bar --- */
+.window-header {
+    height: 30px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 4px 3px 8px;
+    color: #ffffff;
+    font-family: Tahoma, "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: move;
+    user-select: none;
+    background: linear-gradient(to bottom, #4fa5ff 0%, #2d8bea 8%, #0b6fe8 45%, #075bd3 100%);
+    border-radius: 6px 6px 0 0;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.7), inset 0 -1px rgba(0, 50, 130, 0.6);
+}
+
+.window.inactive .window-header {
+    background: linear-gradient(to bottom, #b8c8df 0%, #8ea5c4 45%, #7189a9 100%);
+    color: #e9eef5;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.window-title {
+    min-width: 0;
+    padding-left: 2px;
+    padding-right: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.window-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.window-button {
+    width: 21px;
+    height: 21px;
+    min-width: 21px;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    border: 1px solid #ffffff;
+    background: linear-gradient(to bottom, #7db7f5 0%, #3c8ee8 45%, #1768c7 100%);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: inset 1px 1px rgba(255, 255, 255, 0.45), inset -1px -1px rgba(0, 40, 100, 0.4);
+}
+
+.window-button:hover {
+    background: linear-gradient(to bottom, #b7dcff 0%, #65a9f4 45%, #2877d3 100%);
+}
+
+.window-button:active {
+    background: linear-gradient(to bottom, #1768c7 0%, #3c8ee8 100%);
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.close-btn {
+    background: linear-gradient(to bottom, #ff8875 0%, #ed3e2e 45%, #c5160d 100%);
+    border-color: #ffffff;
+}
+
+.close-btn:hover {
+    background: linear-gradient(to bottom, #ffb5a8 0%, #ff5141 45%, #dc1b10 100%) !important;
+    color: #ffffff !important;
+}
+
+/* --- Window content area ---
+   NOTE: the source file defined ".window-content" twice with conflicting
+   values (10px vs 8px padding, hardcoded #fff vs var(--window-bg)
+   background, and — most importantly — "calc(100% - 30px)" vs
+   "calc(100% - 24px)" for height). Since .window-header is 30px tall,
+   24px would leave a 6px gap or overlap depending on box-sizing. Merged
+   into one theme-aware block below using the correct 30px offset. */
+.window-content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin: 1px;
+    background: var(--window-bg);
+    border: 1px inset var(--window-bg);
+    color: var(--text-color);
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    height: calc(100% - 30px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.window-content h3 {
+    color: #003399;
+    font-family: Tahoma, Arial, sans-serif;
+    margin-top: 0;
+}
+
+.window-content button,
+.dialog-button {
+    min-height: 23px;
+    padding: 2px 14px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 45%, #dcdcdc 100%);
+    border: 1px solid #003c9d;
+    border-radius: 3px;
+    color: #000000;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: inset 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.window-content button:hover,
+.dialog-button:hover {
+    background: linear-gradient(to bottom, #ffffff 0%, #e8f3ff 45%, #c7e1ff 100%);
+}
+
+.window-content button:active,
+.dialog-button:active {
+    background: #d5d5d5;
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Scrollbars (window content) --- */
+.window-content::-webkit-scrollbar {
+    width: 17px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: #ece9d8;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #d9e7f7, #8bb7e8);
+    border: 1px solid #6b91bd;
+}
+
+.window-content::-webkit-scrollbar-button {
+    height: 17px;
+    background: linear-gradient(to bottom, #f5f5f5, #b8cde5);
+    border: 1px solid #6b91bd;
+}
+
+/* --- Global scrollbars (theme-aware, used outside .window-content) --- */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--window-bg);
+    border: 1px inset var(--window-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--window-bg);
+    border: 1px outset var(--window-bg);
+}
+
+::-webkit-scrollbar-button {
+    background: var(--window-bg);
+    border: 1px outset var(--window-bg);
+    height: 16px;
+}
+
+::-webkit-scrollbar-button:hover {
+    background: var(--button-hover);
+}
+
+/* --- Responsive: Windows --- */
+@media (max-width: 768px) {
+    .window {
+        min-width: 280px;
+        width: 95vw !important;
+        height: 85vh !important;
+        top: 5vh !important;
+        left: 2.5vw !important;
+        resize: none;
+    }
+    .window.maximized {
+        width: 100vw !important;
+        height: calc(100vh - 50px) !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+    .window-header {
+        height: 36px;
+        padding: 4px;
+    }
+    .window-title {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .window-button {
+        width: 32px;
+        height: 28px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .window-content {
+        font-size: 14px;
+        padding: 12px;
+    }
+    .window::after {
+        display: none;
+    }
+    .window-header {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .window {
+        border-radius: 5px;
+    }
+    .window-header {
+        height: 32px;
+        padding-left: 7px;
+    }
+    .window-title {
+        font-size: 12px;
+    }
+    .window-button {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        font-size: 12px;
+    }
+    .window-content {
+        height: calc(100% - 32px);
+        padding: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .window {
+        width: 98vw !important;
+        height: 90vh !important;
+        top: 2vh !important;
+        left: 1vw !important;
+    }
+    /* Hide window titles on very small screens to save space */
+    .window-title {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .window {
+        height: 80vh !important;
+        top: 10vh !important;
+    }
+}
+
+
+/* ==========================================================================
+   7. TASKBAR & START BUTTON
+   ========================================================================== */
+
+.taskbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 3px;
+    box-sizing: border-box;
+    z-index: 9999;
+    background: linear-gradient(to bottom, #3f8edc 0%, #2875c5 45%, #1e64ad 100%);
+    border-top: 1px solid #72b3ed;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 -1px 3px rgba(0, 0, 0, 0.25);
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+}
+
+.start-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    margin: 1px 4px 1px 0;
+    padding: 0 13px 0 9px;
+    gap: 5px;
+    box-sizing: border-box;
+    border: 1px solid #185c9f;
+    border-radius: 0 10px 10px 0;
+    background: linear-gradient(to bottom, #5eb04b 0%, #3d9632 45%, #287d24 100%);
+    color: #ffffff;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.65);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.45), inset -1px -1px 0 rgba(0, 0, 0, 0.2), 1px 0 2px rgba(0, 0, 0, 0.2);
+    transition: filter 0.1s ease, background 0.1s ease;
+}
+
+.start-button:hover {
+    background: linear-gradient(to bottom, #6bc457 0%, #4ba63d 45%, #318b2c 100%);
+    filter: brightness(1.05);
+}
+
+.start-button:active,
+.start-button.active {
+    background: linear-gradient(to bottom, #287b25, #3e9634);
+    border-color: #164f1d;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.35);
+    padding-top: 1px;
+}
+
+.start-button i {
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.taskbar-items {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 0 3px;
+    overflow: hidden;
+}
+
+.taskbar-item {
+    flex: 0 1 170px;
+    min-width: 90px;
+    max-width: 180px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid #185b9e;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #4b93d9 0%, #317bc4 50%, #286eb3 100%);
+    color: #ffffff;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    transition: background 0.1s ease, filter 0.1s ease;
+}
+
+.taskbar-item:hover {
+    background: linear-gradient(to bottom, #69a9e5, #438dd0, #347ec1);
+    filter: brightness(1.05);
+}
+
+.taskbar-item.active {
+    background: linear-gradient(to bottom, #0b3d91 0%, #1455a0 45%, #0a2f70 100%);
+    border: 1px inset #0a2f70;
+    color: #ffffff;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.35);
+    text-shadow: 1px 1px 0 #003366;
+}
+
+.taskbar-item.active:hover {
+    background: linear-gradient(to bottom, #174fa5 0%, #2167b8 45%, #0c397e 100%);
+    color: #ffffff;
+}
+
+.clock {
+    flex: 0 0 auto;
+    height: 25px;
+    min-width: 72px;
+    margin: 1px 2px;
+    padding: 0 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #17558f;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #3181cb, #286db0);
+    color: #ffffff;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* --- Responsive: Taskbar --- */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .taskbar { height: 50px; }
+    .start-button { height: 26px; font-size: 12px; }
+    .taskbar-item { height: 26px; font-size: 12px; }
+    .clock { height: 26px; font-size: 12px; }
+}
+
+@media (max-width: 768px) {
+    .taskbar {
+        height: 50px;
+        padding: 8px;
+    }
+    .start-button {
+        height: 40px;
+        padding: 4px 12px;
+        font-size: 14px;
+        margin: 2px;
+    }
+    .start-button i {
+        font-size: 17px;
+    }
+    .taskbar-items {
+        gap: 3px;
+    }
+    .taskbar-item {
+        height: 38px;
+        min-width: 70px;
+        max-width: 120px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+    .clock {
+        height: 38px;
+        min-width: 80px;
+        padding: 0 12px;
+        font-size: 14px;
+    }
+    .taskbar {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+}
+/* NOTE: source had two different 768px taskbar blocks (one with
+   .taskbar-item padding 0 8px / font-size 11px, another with padding
+   0 12px / font-size 12px, plus different .clock min-widths). Merged
+   into the block above, keeping the second (larger/touch-friendlier)
+   set of values — worth a visual check on a real phone. */
+
+@media (max-width: 480px) {
+    .taskbar {
+        height: 46px;
+    }
+    .start-button {
+        width: 70px;
+        justify-content: center;
+        padding: 0 5px;
+        font-size: 11px;
+    }
+    .start-button i {
+        display: none;
+    }
+    .taskbar-item {
+        min-width: 55px;
+        max-width: 90px;
+        padding: 0 6px;
+    }
+    .clock {
+        min-width: 55px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .taskbar {
+        height: 44px;
+    }
+    .start-button,
+    .taskbar-item,
+    .clock {
+        height: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .window-button:focus,
+    .start-menu-item:focus,
+    .taskbar-item:focus {
+        outline: 2px solid var(--active-titlebar-start);
+        outline-offset: 2px;
+    }
+}
+
+
+/* ==========================================================================
+   8. START MENU
+   ========================================================================== */
+
+.start-menu {
+    position: fixed;
+    bottom: 28px;
+    left: 2px;
+    width: 280px;
+    min-height: 320px;
+    background: #f5f5f5;
+    border: 1px solid #0b3d91;
+    border-radius: 4px 4px 0 0;
+    display: none;
+    z-index: 10000;
+    overflow: hidden;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.4);
+    font-family: 'MS Sans Serif', Tahoma, sans-serif;
+}
+
+.start-menu.visible {
+    display: block;
+    animation: startMenuOpen 0.12s ease-out;
+}
+
+@keyframes startMenuOpen {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.start-menu-header {
+    position: relative;
+    height: 52px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(to bottom, #3f8edc 0%, #1764b5 45%, #0b4c9c 100%);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 2px solid #0a3b7a;
+    text-shadow: 1px 1px 1px #003366;
+}
+
+.start-menu-header p {
+    margin: 0 0 0 auto;
+    font-size: 8px;
+    font-weight: normal;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+.start-menu-header i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: linear-gradient(135deg, #ffffff 0%, #d9ecff 100%);
+    border-radius: 4px;
+    color: #0b4c9c;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.start-menu-items {
+    padding: 6px 4px;
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 78%, #e8f1fb 100%);
+}
+
+.start-menu-item {
+    position: relative;
+    min-height: 42px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    color: #000000;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid transparent;
+    transition: background 0.08s ease, color 0.08s ease;
+}
+
+.start-menu-item i {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #174f91;
+    background: #eaf3ff;
+    border: 1px solid #c4d9f2;
+    border-radius: 3px;
+}
+
+.start-menu-item:hover {
+    background: linear-gradient(to bottom, #3d83d0 0%, #1763b1 50%, #0c4b91 100%);
+    color: #ffffff;
+    border: 1px solid #084181;
+    text-shadow: 1px 1px 1px #003366;
+}
+
+.start-menu-item:hover i {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.start-menu-separator {
+    height: 1px;
+    margin: 5px 8px;
+    background: #b5b5b5;
+    border-top: 1px solid #ffffff;
+}
+
+.start-menu-item.has-submenu::after {
+    content: '▶';
+    position: absolute;
+    right: 10px;
+    font-size: 9px;
+    color: #555;
+}
+
+.start-menu-item.has-submenu:hover::after {
+    color: #ffffff;
+}
+
+/* --- Responsive: Start Menu --- */
+@media (max-width: 768px) {
+    .start-menu {
+        bottom: 50px;
+        left: 2px;
+        width: 270px;
+        max-width: calc(100vw - 4px);
+    }
+    .start-menu-header {
+        height: 56px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    .start-menu-item {
+        min-height: 48px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    .start-menu-item i {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+
+/* ==========================================================================
+   9. FORMS & DIALOG BUTTONS
+   ========================================================================== */
+
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px inset var(--window-bg);
+    padding: 2px 4px;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    background: var(--white);
+    color: var(--text-color);
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+    background: var(--button-bg);
+    border: 1px outset var(--button-bg);
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', sans-serif;
+    color: var(--text-color);
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background: var(--button-hover);
+}
+
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+    border: 1px inset var(--button-bg);
+}
+
+.dialog-button {
+    background: var(--button-bg);
+    border: 1px outset var(--button-bg);
+    padding: 4px 16px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', sans-serif;
+    margin: 4px;
+    color: var(--text-color);
+}
+
+.dialog-button:hover {
+    background: var(--button-hover);
+}
+
+.dialog-button:active {
+    border: 1px inset var(--button-bg);
+}
+
+/* --- Responsive: Forms --- */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        padding: 8px;
+        font-size: 14px;
+        min-height: 44px;
+        border: 2px inset var(--window-bg);
+    }
+    button,
+    input[type="button"],
+    input[type="submit"] {
+        padding: 12px 16px;
+        font-size: 14px;
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+
+/* ==========================================================================
+   10. WINDOW: ABOUT
+   ========================================================================== */
+
+#about-window .window-content {
+    font-family: "Josefin Sans", Tahoma, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+.about-sidebar {
+    width: 180px;
+    float: left;
+    margin-right: 15px;
+}
+
+.profile-image {
+    width: 180px;
+    height: 180px;
+    padding: 3px;
+    box-sizing: border-box;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.profile-description {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.profile-description strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #000080;
+}
+
+.profile-description p {
+    margin: 0;
+}
+
+.profile-contact {
+    margin-top: 0;
+    padding-top: 8px;
+    border-top: 1px solid #808080;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #f4f8fd;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.profile-contact > strong {
+    display: block;
+    padding: 5px 8px;
+    color: #ffffff;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    border-bottom: 1px solid #24588c;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.profile-contact a {
+    display: block;
+    padding: 5px 8px;
+    color: #003399;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    background: linear-gradient(to bottom, #ffffff 0%, #edf4fb 100%);
+    border-bottom: 1px solid #d4e1ef;
+    transition: background 0.1s ease, padding-left 0.1s ease;
+}
+
+.profile-contact a:last-child {
+    border-bottom: none;
+}
+
+.profile-contact a:hover {
+    color: #ffffff;
+    padding-left: 12px;
+    background: linear-gradient(to bottom, #5da0d9 0%, #000080 100%);
+    text-decoration: none;
+}
+
+.profile-contact a:active {
+    background: #2865a7;
+    padding-left: 13px;
+}
+
+.about-main {
+    margin-left: 195px;
+    min-width: 0;
+}
+
+.welcome-box,
+.education-header {
+    margin-bottom: 12px;
+    padding: 10px;
+    background: #ffffe1;
+    border: 1px solid #808080;
+    box-shadow: inset 1px 1px #ffffff, inset -1px -1px #dfdfdf;
+    position: relative; /* needed for .education-header::before accent bar */
+}
+
+.welcome-box h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.welcome-box p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.about-section {
+    margin-bottom: 12px;
+}
+
+.about-section h4,
+.skills-heading h4 {
+    margin: 0 0 8px;
+    padding: 4px 6px;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.about-section p,
+.skills-heading p {
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.about-section strong {
+    color: #000080;
+}
+
+/* --- Responsive: About --- */
+@media (max-width: 600px) {
+    .about-sidebar {
+        width: 120px;
+        float: left;
+        margin-right: 10px;
+    }
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    .profile-description {
+        padding: 6px;
+        font-size: 10px;
+    }
+    .profile-description strong {
+        font-size: 11px;
+    }
+    .about-main {
+        margin-left: 130px;
+    }
+    .welcome-box {
+        padding: 8px;
+    }
+    .welcome-box h3 {
+        font-size: 13px;
+    }
+    .welcome-box p,
+    .about-section p {
+        font-size: 11px;
+    }
+}
+
+
+/* ==========================================================================
+   11. WINDOW: EDUCATION
+   ========================================================================== */
+
+#education-window .window-content {
+    padding: 0;
+    margin: 1px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #ffffff;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+    box-sizing: border-box;
+}
+
+.education-content {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #eef5ff 0, #ffffff 180px);
+    padding: 18px 22px 30px;
+}
+
+/* Blue XP accent bar on .education-header (shares styling with .welcome-box above) */
+.education-header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #5b9bd5, #2459a6);
+    border-radius: 3px 0 0 3px;
+}
+
+.education-header h2 {
+    margin: 0 0 5px 5px;
+    color: #0a0a0a;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.education-header p {
+    margin: 0 0 0 5px;
+    color: #000000;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.education-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 14px;
+    margin-bottom: 12px;
+    padding: 13px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.education-item:hover {
+    background: #d0d0d0;
+    box-shadow: inset 0 1px 0 #ffffff, 0 1px 4px rgba(0, 60, 130, 0.15);
+}
+
+.education-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    bottom: -8px;
+    width: 1px;
+    height: 7px;
+    background: #9db5cf;
+}
+
+.education-icon {
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #ffffff 0%, #dcecff 100%);
+    border: 1px solid #9eb8d5;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(0, 0, 0, 0.12);
+    font-size: 25px;
+    user-select: none;
+}
+
+.education-details {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.education-details h3 {
+    margin: 0 0 4px;
+    color: #000080;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.education-details h4 {
+    margin: 0 0 7px;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.education-details p {
+    margin: 7px 0 0;
+    color: #000000;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.education-date {
+    display: inline-block;
+    padding: 3px 7px;
+    background-color: #e0e0e0; /* TODO: intended accent colour? */
+    border: 1px solid #a9c3df;
+    border-radius: 2px;
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: inset 0 1px 0 #ffffff;
+    white-space: nowrap;
+}
+
+/* --- Scrollbar (Education window) --- */
+#education-window .window-content::-webkit-scrollbar {
+    width: 17px;
+}
+
+#education-window .window-content::-webkit-scrollbar-track {
+    background: #eeeeee;
+    border-left: 1px solid #b5b5b5;
+}
+
+#education-window .window-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #f7f7f7, #d6d6d6);
+    border: 1px solid #8b8b8b;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #aaaaaa;
+}
+
+#education-window .window-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to right, #ffffff, #c8d8e8);
+}
+
+/* --- Responsive: Education --- */
+@media (max-width: 700px) {
+    .education-content {
+        padding: 12px;
+    }
+    .education-header {
+        padding: 10px 12px;
+    }
+    .education-header h2 {
+        font-size: 16px;
+    }
+    .education-item {
+        padding: 10px;
+        gap: 10px;
+    }
+    .education-icon {
+        flex-basis: 40px;
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 450px) {
+    .education-content {
+        padding: 8px;
+    }
+    .education-header {
+        margin-bottom: 10px;
+        padding: 9px;
+    }
+    .education-header h2 {
+        font-size: 15px;
+    }
+    .education-item {
+        padding: 9px;
+        gap: 8px;
+    }
+    .education-icon {
+        flex-basis: 34px;
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+    }
+    .education-details h3 {
+        font-size: 12px;
+    }
+    .education-details h4,
+    .education-details p {
+        font-size: 10px;
+    }
+    .education-date {
+        font-size: 9px;
+    }
+}
+
+
+/* ==========================================================================
+   12. WINDOW: SKILLS
+   ========================================================================== */
+
+.skills-section {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: "MS Sans Serif", Arial, sans-serif;
+}
+
+.section-title {
+    margin-bottom: 12px;
+}
+
+.section-title h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000080;
+}
+
+.section-title p {
+    margin: 0;
+    font-size: 11px;
+    color: #444;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.skill-card {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 10px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.skill-card:hover {
+    background: #d0d0d0;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #808080;
+}
+
+.skill-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.skill-header h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000080;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+}
+
+.skill-list span {
+    display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    background: #e0e0e0;
+    color: #000000;
+    font-size: 10px;
+    line-height: 1.2;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    overflow-wrap: break-word;
+}
+
+.skill-list span:hover {
+    background: #000080;
+    color: #ffffff;
+    cursor: default;
+}
+
+.skill-list small {
+    display: block;
+    margin-left: 3px;
+    color: #666;
+    font-size: 9px;
+}
+
+.certifications .skill-list span {
+    background: #ffffe1;
+}
+
+.certifications .skill-list span:hover {
+    background: #000080;
+    color: #ffffff;
+}
+
+/* --- Responsive: Skills ---
+   NOTE: the source file had THREE separate responsive rulesets for
+   .skills-grid / .section-title that partially conflicted — e.g.
+   .section-title h2 was set to 16px in one 600px block and 26px in
+   another 600px block further down, and .skills-section padding was
+   set to both "6px" and "40px 15px" at the same breakpoint. Consolidated
+   below into one ruleset per breakpoint; kept the smaller/tighter values
+   since this content lives inside a fixed-size desktop window, not a
+   full-width page section — flag if you intended the larger marketing-
+   page-style spacing (40px/26px) instead. */
+@media (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-section {
+        padding: 6px;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    .section-title h2 {
+        font-size: 16px;
+    }
+    .skill-card {
+        padding: 8px;
+    }
+    .skill-header h3 {
+        font-size: 12px;
+    }
+    .skill-list span {
+        font-size: 10px;
+        padding: 4px 5px;
+    }
+}
+
+@media (max-width: 350px) {
+    .skills-section {
+        padding: 4px;
+    }
+    .skills-grid {
+        gap: 6px;
+    }
+    .skill-card {
+        padding: 7px;
+    }
+    .skill-list {
+        gap: 4px;
+    }
+}
+
+
+/* ==========================================================================
+   13. WINDOW: PROJECTS
+   ========================================================================== */
+
+.projects-content {
+    padding: 4px;
+    background: #c0c0c0;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+
+.projects-toolbar {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    background: #c0c0c0;
+}
+
+.projects-toolbar button {
+    min-width: 75px;
+    padding: 3px 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+    cursor: pointer;
+}
+
+.projects-toolbar button:active {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.projects-address {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    padding: 2px;
+    background: #c0c0c0;
+}
+
+.projects-address span {
+    font-weight: bold;
+}
+
+.projects-address input {
+    flex: 1;
+    height: 18px;
+    padding: 1px 3px;
+    background: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+
+.projects-introduction {
+    margin-top: 5px;
+    padding: 6px;
+    background: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.projects-introduction strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #000080;
+    font-size: 13px;
+}
+
+.projects-introduction p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.projects-list {
+    margin-top: 5px;
+    height: 245px;
+    overflow: auto;
+    background: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+}
+
+.projects-table th {
+    height: 20px;
+    padding: 2px 5px;
+    text-align: left;
+    background: #c0c0c0;
+    color: #000000;
+    font-weight: bold;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    white-space: nowrap;
+}
+
+.projects-table th:nth-child(1) { width: 30%; }
+.projects-table th:nth-child(2) { width: 20%; }
+.projects-table th:nth-child(3) { width: 35%; }
+.projects-table th:nth-child(4) { width: 15%; }
+
+.projects-table td {
+    padding: 5px;
+    border-bottom: 1px solid #eeeeee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.projects-table td:first-child {
+    color: #000080;
+    font-weight: bold;
+}
+
+.projects-table tbody tr {
+    cursor: pointer;
+}
+
+.projects-table tbody tr:hover {
+    background: #000080;
+    color: #ffffff;
+}
+
+.projects-table tbody tr:hover td:first-child {
+    color: #ffffff;
+}
+
+.projects-status {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding: 3px 5px;
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    font-size: 10px;
+}
+
+.projects-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 7px;
+}
+
+.projects-buttons button {
+    min-width: 100px;
+    padding: 4px 12px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.projects-buttons button:active {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+
+/* ==========================================================================
+   14. WINDOW: LIVE STREAM / CHAT
+   ========================================================================== */
+
+.stream-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.stream-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #e8f1fb;
+    border: 1px solid #7f9db9;
+    padding: 6px 8px;
+    min-height: 32px;
+}
+
+.stream-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.live-badge {
+    background: #d00000;
+    color: white;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #800000;
+    text-shadow: 1px 1px #600000;
+}
+
+.viewer-count {
+    font-size: 11px;
+    color: #333;
+}
+
+.stream-layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    gap: 8px;
+}
+
+.stream-video {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    background: #000;
+    border: 2px inset #c0c0c0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stream-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(180, 0, 0, 0.9);
+    color: white;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #ff5555;
+    text-shadow: 1px 1px #500000;
+}
+
+.stream-chat {
+    width: 220px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 2px inset #c0c0c0;
+    min-height: 0;
+}
+
+.chat-header {
+    background: linear-gradient(to bottom, #4f91c9, #2869a5);
+    color: white;
+    padding: 5px 7px;
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: 1px solid #1b4e7c;
+    text-shadow: 1px 1px #245;
+}
+
+/* --- Chat messages ---
+   NOTE: the source file defined .chat-message / .chat-messages / the
+   .username colour classes TWICE with different values in two different
+   places (one plain version near the stream styles, one with
+   display:flex + a fade/slide-in animation further down — and each set
+   used a different hex palette for the username colours). Merged into
+   one block below, keeping the animated flex version and its colour
+   palette since it looked like the more finished iteration — compare
+   against the old blue/red/green/purple/orange hexes if the merge
+   picked the "wrong" set. */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    padding: 6px;
+    background: #fafafa;
+    font-size: 11px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.chat-message {
+    display: flex;
+    gap: 6px;
+    padding: 4px 6px;
+    font-family: "MS Sans Serif", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    animation: chatMessageIn 0.25s ease-out;
+}
+
+.chat-message .username {
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 4px;
+}
+
+.chat-message span {
+    color: #222;
+    word-break: break-word;
+}
+
+.username.blue { color: #0066cc; }
+.username.red { color: #cc0000; }
+.username.green { color: #008000; }
+.username.purple { color: #800080; }
+.username.orange { color: #cc6600; }
+
+@keyframes chatMessageIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-input {
+    display: flex;
+    padding: 5px;
+    gap: 4px;
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+}
+
+.chat-input input {
+    flex: 1;
+    min-width: 0;
+    height: 22px;
+    padding: 2px 4px;
+    border: 1px inset #c0c0c0;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 10px;
+}
+
+.chat-input button {
+    padding: 2px 8px;
+    height: 22px;
+    font-size: 10px;
+}
+
+.stream-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+    background: #e8e8e8;
+    border: 1px inset #c0c0c0;
+    font-size: 10px;
+    color: #333;
+}
+
+/* --- Responsive: Live Stream --- */
+@media (max-width: 600px) {
+    .stream-layout {
+        flex-direction: column;
+    }
+    .stream-video {
+        min-height: 180px;
+    }
+    .stream-chat {
+        width: 100%;
+        min-height: 150px;
+    }
+    .stream-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+
+/* ==========================================================================
+   15. FIREWORKS EFFECT
+   ========================================================================== */
+
+#fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.firework-particle {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+    animation: firework-explode 1.2s ease-out forwards;
+}
+
+@keyframes firework-explode {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+
+/* ==========================================================================
+   16. FAKE VIRUS / SHUTDOWN PRANK EFFECTS
+   ========================================================================== */
+
+.virus-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    animation: virusFlash 0.15s infinite alternate;
+}
+
+@keyframes virusFlash {
+    from { background: rgba(0, 0, 0, 0.75); }
+    to { background: rgba(120, 0, 0, 0.75); }
+}
+
+.virus-warning {
+    width: 380px;
+    background: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 8px 8px 0 #000;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    color: #000;
+}
+
+.virus-title {
+    background: linear-gradient(to right, #800000, #c00000);
+    color: white;
+    padding: 5px 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.virus-body {
+    text-align: center;
+    padding: 25px;
+}
+
+.virus-icon-large {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.virus-body h2 {
+    color: #c00000;
+    margin: 5px 0 12px;
+    font-size: 22px;
+}
+
+.virus-body p {
+    font-size: 12px;
+}
+
+.virus-progress {
+    height: 18px;
+    background: white;
+    border: 2px inset #c0c0c0;
+    margin: 18px 0 10px;
+    overflow: hidden;
+}
+
+.virus-progress div {
+    width: 100%;
+    height: 100%;
+    background: #000080;
+    animation: virusProgress 4s linear;
+}
+
+@keyframes virusProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+.fake-virus-window {
+    position: fixed;
+    width: 300px;
+    background: #c0c0c0;
+    border: 2px outset #fff;
+    box-shadow: 5px 5px 0 #000;
+    z-index: 1000000;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    animation: popupShake 0.15s;
+}
+
+@keyframes popupShake {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+.fake-virus-header {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+
+.fake-virus-content {
+    padding: 15px;
+    text-align: center;
+    font-size: 11px;
+}
+
+.fake-warning-icon {
+    font-size: 35px;
+    color: #ffcc00;
+    margin-bottom: 8px;
+}
+
+.fake-virus-content button {
+    min-width: 70px;
+}
+
+.fake-shutdown {
+    position: fixed;
+    inset: 0;
+    z-index: 2000000;
+    background: #000080;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
+.fake-shutdown h2 {
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+.fake-shutdown p {
+    font-size: 13px;
+}
+
+.shutdown-logo {
+    font-size: 60px;
+}
+
+.shutdown-bar {
+    width: 250px;
+    height: 15px;
+    background: #000;
+    border: 1px solid white;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.shutdown-bar::after {
+    content: '';
+    display: block;
+    width: 40%;
+    height: 100%;
+    background: white;
+    animation: shutdownProgress 2s linear infinite;
+}
+
+@keyframes shutdownProgress {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(350%); }
+}
+
+
+/* ==========================================================================
+   17. UTILITY CLASSES & CRT EFFECT
+   ========================================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.crt-effect {
+    position: relative;
+}
+
+.crt-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+}
+
+
+/* ==========================================================================
+   18. ACCESSIBILITY EXTRAS (mobile)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .icon {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    .window-content h3,
+    .window-content h4 {
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+    .window-content p {
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+    #calculator-window .window-content {
+        padding: 8px;
+    }
+    #calc-display {
+        font-size: 18px;
+        height: 44px;
+        margin-bottom: 8px;
+    }
+    #calculator-window button {
+        height: 44px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    #notepad-text {
+        font-size: 14px;
+        padding: 8px;
+        line-height: 1.4;
+    }
+    #themes-window input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+    #themes-window label {
+        font-size: 14px;
+        line-height: 1.5;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    #calculator-window {
+        width: 95vw !important;
+        height: 400px !important;
+    }
+    #notepad-text {
+        font-size: 13px;
+    }
+}
+
+
+/* ==========================================================================
+   19. WINDOW: PAINT (added later)
+   ========================================================================== */
+
+.paint-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px;
+    background: #c0c0c0;
+}
+
+/* --- Toolbar --- */
+.paint-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background: #c0c0c0;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+}
+
+.paint-tool {
+    padding: 3px 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.paint-tool.active {
+    background: #a0a0a0;
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.paint-size-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    font-size: 11px;
+}
+
+.paint-size-label input[type="range"] {
+    width: 80px;
+}
+
+/* --- Canvas area --- */
+.paint-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #808080;
+    border: 2px inset #c0c0c0;
+    overflow: auto;
+}
+
+#paint-canvas {
+    background: #ffffff;
+    cursor: crosshair;
+    touch-action: none; /* let pointer events handle touch drawing instead of the page scrolling */
+}
+
+/* --- Palette row --- */
+.paint-palette-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+}
+
+#paint-current-color {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background: #000000;
+    border: 2px inset #c0c0c0;
+}
+
+#paint-color-picker {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 2px inset #c0c0c0;
+    cursor: pointer;
+}
+
+.paint-palette {
+    display: grid;
+    grid-template-columns: repeat(10, 16px);
+    grid-auto-rows: 16px;
+    gap: 2px;
+}
+
+.paint-swatch {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #404040;
+    cursor: pointer;
+}
+
+.paint-swatch:hover {
+    outline: 1px solid #000080;
+}
+
+/* --- Responsive: Paint --- */
+@media (max-width: 600px) {
+    .paint-toolbar {
+        gap: 3px;
+    }
+    .paint-tool {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+    .paint-palette {
+        grid-template-columns: repeat(8, 18px);
+        grid-auto-rows: 18px;
+    }
+    .paint-swatch {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+/* ==========================================================================
+   20. RECYCLE BIN (added later)
+   ========================================================================== */
+
+/* Everything else about this window (toolbar/address bar/table/status bar)
+   intentionally reuses the .projects-* classes above so it matches the
+   Projects window's look exactly — this is the only Recycle-Bin-specific
+   rule needed. */
+.recycle-empty-msg {
+    padding: 24px 10px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* --- Clickable thumbnail inside a Recycle Bin row --- */
+.recycle-name-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.recycle-thumb {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    vertical-align: middle;
+    border: 1px solid #808080;
+    cursor: pointer;
+}
+
+.recycle-thumb:hover {
+    outline: 1px solid #000080;
+}
+
+/* --- Image lightbox (opened by clicking a thumbnail) --- */
+.image-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 4000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.image-lightbox-box {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: #ece9d8;
+    border: 1px solid #003c9d;
+    border-radius: 6px 6px 3px 3px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.image-lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px 4px 8px;
+    background: linear-gradient(to bottom, #4fa5ff 0%, #2d8bea 8%, #0b6fe8 45%, #075bd3 100%);
+    color: #ffffff;
+    font-family: Tahoma, "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.image-lightbox-box img {
+    display: block;
+    max-width: 90vw;
+    max-height: calc(90vh - 30px);
+    object-fit: contain;
+}
+
+
+/* ==========================================================================
+   ISSUES FOUND WHILE REORGANIZING (not fixed automatically — your call)
+   ==========================================================================
+
+   1. Duplicate ":root" block ("Pastel Pink Theme") was an exact copy of
+      the default theme and wasn't scoped with [data-theme="..."], so it
+      never did anything. Removed as dead code. If you want a real pink
+      theme, you'll need to add :root[data-theme="pastel-pink"] { ... }
+      with actual pink values and wire up a theme-switcher option for it
+      (the other themes — cyberpunk/lilac/green — all follow this pattern).
+
+   2. #desktop never uses --desktop-bg or --desktop-image — it's hardcoded
+      to the XP wallpaper image. That means switching to cyberpunk/lilac/
+      green currently re-themes the windows/taskbar but NOT the desktop
+      background. If that's intentional, fine — otherwise you'll want
+      something like `background: var(--desktop-bg, var(--desktop-image));`
+
+   3. `.window-content` was defined twice with different padding/margin/
+      background/height math (30px vs 24px header offset). Merged to the
+      30px version since that matches the real .window-header height.
+
+   4. `.chat-message`, `.chat-messages`, and the `.username.*` color
+      classes were each defined twice with conflicting values (two
+      different color palettes, two different heights/paddings). Merged
+      to what looked like the newer/animated version — worth a visual
+      double-check.
+
+   5. `.skills-grid` / `.section-title` responsive rules were defined in
+      two separate places with conflicting values at the same breakpoints
+      (e.g. section-title h2 at both 16px and 26px for max-width: 600px).
+      Consolidated to the smaller, window-appropriate sizing.
+
+   6. Several other components (.desktop-icons/.icon, .taskbar/.taskbar-item)
+      had two separate @media (max-width: 768px) blocks with different
+      values. All merged — each is called out above where it happened.
+
+   7. The Google Fonts import for "MS Sans Serif" points to a font that
+      doesn't exist on Google Fonts, so it silently fails and you're
+      falling back to the browser's default sans-serif. Worth swapping
+      for a real bitmap font if the retro look matters.
+   ========================================================================== */

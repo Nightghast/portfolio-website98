@@ -773,23 +773,23 @@ function showFakeShutdown() {
    ========================================================================== */
 
 const chatMessages = [
-    { username: "Reception Y", message: "Good Morning!", color: "green" },
+    { username: "Reception Y", message: "Make sure it goes to the fridge, not your stomach!", color: "green" },
     { username: "TechGuy99", message: "Love the website \ud83d\ude02", color: "red" },
     { username: "KJ", message: "Coffee????", color: "green" },
     { username: "RetroKid", message: "Feels like 1999 again!", color: "purple" },
     { username: "GamerX2", message: "What are you working on?", color: "orange" },
-    { username: "DirectorJ", message: "Can you please unlock my account?", color: "green" },
+    { username: "g-YAH", message: "Can you please unlock my account?", color: "green" },
     { username: "RetroGamer", message: "Windows XP vibes \ud83d\udc40", color: "red" },
     { username: "TechAlex", message: "The animations are really cool!", color: "orange" },
     { username: "ByteMaster", message: "Nice portfolio!", color: "blue" },
     { username: "DO-RC97", message: "Hee-Hee!", color: "green" },
     { username: "CyberNinja", message: "The desktop looks awesome \ud83d\udd25", color: "purple" },
     { username: "ITGuy", message: "Are you actually using Windows 98?", color: "orange" },
-    { username: "Bestfriend E", message: "I like Blue!", color: "green" },
+    { username: "L-ham", message: "Pst-pst!", color: "green" },
     { username: "PixelGirl", message: "The icons are so cute!", color: "red" },
-    { username: "HR26", message: "Bell Boy!", color: "green" },
+    { username: "HR26", message: "Certified gothic lad!", color: "green" },
     { username: "RetroFan", message: "This takes me back \ud83d\ude02", color: "purple" },
-    { username: "Z", message: "My G ^>^", color: "green" }
+    { username: "Z", message: "We might have run into each other at a coffee shop ?", color: "green" }
 ];
 
 function addChatMessage() {
